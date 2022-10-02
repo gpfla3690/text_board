@@ -7,6 +7,7 @@ import service.ArticleService;
 import utils.Util;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class ArticleController implements Controller{
@@ -36,6 +37,9 @@ public class ArticleController implements Controller{
                 break;
             case "modify":
                 modify(request);
+                break;
+            case "list":
+                list();
                 break;
             default:
                 System.out.println("존재하지 않는 페이지 입니다.");
@@ -156,6 +160,19 @@ public class ArticleController implements Controller{
         findArticle.setUpdateDate(LocalDateTime.now());
 
         System.out.println("게시글이 성공적으로 수정되었습니다.");
+
+    }
+
+    public void list(){
+        System.out.println(" == 게시글 목록 == ");
+
+        List<Article> articles = articleService.getArticles();
+
+        System.out.println("번호 | 제목 | 작성자");
+
+        for(Article article : articles){
+            System.out.println(article.getId() + " | " + article.getTitle() + " | " + article.getAuthor());
+        }
 
     }
 

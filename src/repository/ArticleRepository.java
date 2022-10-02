@@ -36,4 +36,8 @@ public class ArticleRepository {
     public void delete(Article article) {
         store.remove(article);
     }
+
+    public List<Article> getArticles() {
+        return store;
+    }
 }

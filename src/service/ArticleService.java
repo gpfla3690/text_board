@@ -4,6 +4,8 @@ import data.Article;
 import infra.Container;
 import repository.ArticleRepository;
 
+import java.util.List;
+
 public class ArticleService {
 
     private ArticleRepository articleRepository;
@@ -22,5 +24,9 @@ public class ArticleService {
 
     public void delete(Article article) {
         articleRepository.delete(article);
+    }
+
+    public List<Article> getArticles() {
+        return articleRepository.getArticles();
     }
 }
