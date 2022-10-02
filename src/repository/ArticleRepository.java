@@ -20,4 +20,16 @@ public class ArticleRepository {
 
          return articleId;
     }
+
+    public Article getArticleById(int id) {
+
+        for(Article article : store){
+            if(article.getId() == id){
+                return article;
+            }
+        }
+
+        return null;
+
+    }
 }

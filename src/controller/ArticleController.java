@@ -1,8 +1,10 @@
 package controller;
 
+import data.Article;
 import infra.Container;
 import infra.Request;
 import service.ArticleService;
+import utils.Util;
 
 import java.util.Scanner;
 
@@ -24,6 +26,9 @@ public class ArticleController implements Controller{
         switch (request.getTarget()){
             case "write":
                 write(request);
+                break;
+            case "detail":
+                detail(request);
                 break;
             default:
                 System.out.println("존재하지 않는 페이지 입니다.");
@@ -54,5 +59,30 @@ public class ArticleController implements Controller{
 
     }
 
+    public void detail(Request request){
+
+        String paramKey = "id";
+
+        if(!Util.hasParam(request, paramKey)){
+            System.out.println(paramKey + " 파라미터가 필요합니다.");
+            return;
+        }
+
+        int articleId = request.getParameterIntValue(paramKey);
+
+        Article findArticle = articleService.getArticleById(articleId);
+
+        if(findArticle == null){
+            System.out.println("해당 게시글은 존재하지 않습니다.");
+            return;
+        }
+
+        System.out.println(" == " + articleId + "번 게시글 == ");
+        System.out.println("작성자 : " + findArticle.getAuthor());
+        System.out.println("제목 : " + findArticle.getTitle());
+        System.out.println("내용 : " + findArticle.getBody());
+        System.out.println("작성일 : " + findArticle.getRegDate());
+
+    }
 
 }
